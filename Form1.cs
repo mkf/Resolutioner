@@ -2,6 +2,7 @@ namespace Resolutioner
 {
     public partial class Form1 : Form
     {
+        private static Screen srn = Screen.PrimaryScreen;
         public Form1()
         {
             InitializeComponent();
@@ -72,7 +73,11 @@ namespace Resolutioner
 
         private void DoResolution(decimal width, decimal height)
         {
-            if(!dontDoThingsCheckBox.Checked) {}
+            if (!dontDoThingsCheckBox.Checked)
+            {
+                
+
+            }
         }
 
         private void endProgramButton_Click(object sender, EventArgs e)
@@ -101,6 +106,39 @@ namespace Resolutioner
             desiredHeightField.Value = restoreHeight;
             restoreWidthField.Value = desiredWidth;
             restoreHeightField.Value = desiredHeight;
+        }
+
+        private static Tuple<decimal, decimal> fetchRes()
+        {
+            return new Tuple<decimal,decimal>(srn.Bounds.Width, srn.Bounds.Height);
+        }
+
+        private void fetchIntoRestore_Click(object sender, EventArgs e)
+        {
+            var fetch = fetchRes();
+            if (desiredWidthField.Value != fetch.Item1 || desiredHeightField.Value != fetch.Item2)
+            {
+                restoreWidthField.Value = fetch.Item1;
+                restoreHeightField.Value = fetch.Item2;
+            }
+            else
+            {
+                swapResolutionsButton.Focus();
+            }
+        }
+
+        private void fetchIntoDesired_Click(object sender, EventArgs e)
+        {
+            var fetch = fetchRes();
+            if (restoreWidthField.Value != fetch.Item1 || restoreHeightField.Value != fetch.Item2)
+            {
+                desiredWidthField.Value = fetch.Item1;
+                desiredHeightField.Value = fetch.Item2;
+            }
+            else
+            {
+                swapResolutionsButton.Focus();
+            }
         }
     }
 }

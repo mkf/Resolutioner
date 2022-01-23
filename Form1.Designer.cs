@@ -51,6 +51,8 @@
             this.stateConfigSavedCheckBox = new System.Windows.Forms.CheckBox();
             this.dontDoThingsCheckBox = new System.Windows.Forms.CheckBox();
             this.endProgramButton = new System.Windows.Forms.Button();
+            this.fetchIntoRestore = new System.Windows.Forms.Button();
+            this.fetchIntoDesired = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.desiredWidthField)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.desiredHeightField)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.restoreHeightField)).BeginInit();
@@ -59,7 +61,7 @@
             // 
             // desiredWidthField
             // 
-            this.desiredWidthField.Location = new System.Drawing.Point(91, 74);
+            this.desiredWidthField.Location = new System.Drawing.Point(150, 76);
             this.desiredWidthField.Maximum = new decimal(new int[] {
             3000,
             0,
@@ -82,7 +84,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 32);
+            this.label1.Location = new System.Drawing.Point(71, 34);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(342, 32);
             this.label1.TabIndex = 1;
@@ -91,7 +93,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 81);
+            this.label2.Location = new System.Drawing.Point(71, 83);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 32);
             this.label2.TabIndex = 2;
@@ -99,7 +101,7 @@
             // 
             // desiredHeightField
             // 
-            this.desiredHeightField.Location = new System.Drawing.Point(91, 117);
+            this.desiredHeightField.Location = new System.Drawing.Point(150, 119);
             this.desiredHeightField.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -122,7 +124,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 119);
+            this.label3.Location = new System.Drawing.Point(71, 121);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 32);
             this.label3.TabIndex = 4;
@@ -131,7 +133,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(428, 124);
+            this.label4.Location = new System.Drawing.Point(487, 126);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 32);
             this.label4.TabIndex = 10;
@@ -139,7 +141,7 @@
             // 
             // restoreHeightField
             // 
-            this.restoreHeightField.Location = new System.Drawing.Point(507, 117);
+            this.restoreHeightField.Location = new System.Drawing.Point(566, 119);
             this.restoreHeightField.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -162,7 +164,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(428, 81);
+            this.label5.Location = new System.Drawing.Point(487, 83);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(73, 32);
             this.label5.TabIndex = 8;
@@ -171,7 +173,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(428, 32);
+            this.label6.Location = new System.Drawing.Point(487, 34);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(319, 32);
             this.label6.TabIndex = 7;
@@ -179,7 +181,7 @@
             // 
             // restoreWidthField
             // 
-            this.restoreWidthField.Location = new System.Drawing.Point(507, 74);
+            this.restoreWidthField.Location = new System.Drawing.Point(566, 76);
             this.restoreWidthField.Maximum = new decimal(new int[] {
             3000,
             0,
@@ -202,7 +204,7 @@
             // swapResolutionsButton
             // 
             this.swapResolutionsButton.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.swapResolutionsButton.Location = new System.Drawing.Point(346, 74);
+            this.swapResolutionsButton.Location = new System.Drawing.Point(405, 76);
             this.swapResolutionsButton.Name = "swapResolutionsButton";
             this.swapResolutionsButton.Size = new System.Drawing.Size(76, 77);
             this.swapResolutionsButton.TabIndex = 11;
@@ -219,7 +221,7 @@
             // 
             // nowDesiredButton
             // 
-            this.nowDesiredButton.Location = new System.Drawing.Point(91, 176);
+            this.nowDesiredButton.Location = new System.Drawing.Point(150, 178);
             this.nowDesiredButton.Name = "nowDesiredButton";
             this.nowDesiredButton.Size = new System.Drawing.Size(150, 46);
             this.nowDesiredButton.TabIndex = 12;
@@ -229,7 +231,7 @@
             // 
             // nowRestoreButton
             // 
-            this.nowRestoreButton.Location = new System.Drawing.Point(507, 176);
+            this.nowRestoreButton.Location = new System.Drawing.Point(566, 178);
             this.nowRestoreButton.Name = "nowRestoreButton";
             this.nowRestoreButton.Size = new System.Drawing.Size(150, 46);
             this.nowRestoreButton.TabIndex = 13;
@@ -240,7 +242,7 @@
             // loginCheckBox
             // 
             this.loginCheckBox.AutoSize = true;
-            this.loginCheckBox.Location = new System.Drawing.Point(47, 271);
+            this.loginCheckBox.Location = new System.Drawing.Point(106, 273);
             this.loginCheckBox.Name = "loginCheckBox";
             this.loginCheckBox.Size = new System.Drawing.Size(187, 36);
             this.loginCheckBox.TabIndex = 14;
@@ -250,7 +252,7 @@
             // switchCheckBox
             // 
             this.switchCheckBox.AutoSize = true;
-            this.switchCheckBox.Location = new System.Drawing.Point(47, 313);
+            this.switchCheckBox.Location = new System.Drawing.Point(106, 315);
             this.switchCheckBox.Name = "switchCheckBox";
             this.switchCheckBox.Size = new System.Drawing.Size(199, 36);
             this.switchCheckBox.TabIndex = 15;
@@ -260,7 +262,7 @@
             // logoffCheckBox
             // 
             this.logoffCheckBox.AutoSize = true;
-            this.logoffCheckBox.Location = new System.Drawing.Point(47, 355);
+            this.logoffCheckBox.Location = new System.Drawing.Point(106, 357);
             this.logoffCheckBox.Name = "logoffCheckBox";
             this.logoffCheckBox.Size = new System.Drawing.Size(203, 36);
             this.logoffCheckBox.TabIndex = 16;
@@ -273,7 +275,7 @@
             this.shutdownCheckBox.BackColor = System.Drawing.SystemColors.Control;
             this.shutdownCheckBox.Enabled = false;
             this.shutdownCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.shutdownCheckBox.Location = new System.Drawing.Point(298, 355);
+            this.shutdownCheckBox.Location = new System.Drawing.Point(357, 357);
             this.shutdownCheckBox.Name = "shutdownCheckBox";
             this.shutdownCheckBox.Size = new System.Drawing.Size(267, 36);
             this.shutdownCheckBox.TabIndex = 17;
@@ -284,7 +286,7 @@
             // stateConfigSavedCheckBox
             // 
             this.stateConfigSavedCheckBox.AutoSize = true;
-            this.stateConfigSavedCheckBox.Location = new System.Drawing.Point(288, 200);
+            this.stateConfigSavedCheckBox.Location = new System.Drawing.Point(347, 202);
             this.stateConfigSavedCheckBox.Name = "stateConfigSavedCheckBox";
             this.stateConfigSavedCheckBox.Size = new System.Drawing.Size(188, 36);
             this.stateConfigSavedCheckBox.TabIndex = 18;
@@ -294,7 +296,7 @@
             // dontDoThingsCheckBox
             // 
             this.dontDoThingsCheckBox.AutoSize = true;
-            this.dontDoThingsCheckBox.Location = new System.Drawing.Point(591, 283);
+            this.dontDoThingsCheckBox.Location = new System.Drawing.Point(650, 285);
             this.dontDoThingsCheckBox.Name = "dontDoThingsCheckBox";
             this.dontDoThingsCheckBox.Size = new System.Drawing.Size(213, 36);
             this.dontDoThingsCheckBox.TabIndex = 19;
@@ -303,7 +305,7 @@
             // 
             // endProgramButton
             // 
-            this.endProgramButton.Location = new System.Drawing.Point(598, 333);
+            this.endProgramButton.Location = new System.Drawing.Point(657, 335);
             this.endProgramButton.Name = "endProgramButton";
             this.endProgramButton.Size = new System.Drawing.Size(190, 46);
             this.endProgramButton.TabIndex = 20;
@@ -311,11 +313,35 @@
             this.endProgramButton.UseVisualStyleBackColor = true;
             this.endProgramButton.Click += new System.EventHandler(this.endProgramButton_Click);
             // 
+            // fetchIntoRestore
+            // 
+            this.fetchIntoRestore.Location = new System.Drawing.Point(812, 93);
+            this.fetchIntoRestore.Name = "fetchIntoRestore";
+            this.fetchIntoRestore.Size = new System.Drawing.Size(166, 46);
+            this.fetchIntoRestore.TabIndex = 21;
+            this.fetchIntoRestore.Text = "⬅🖥";
+            this.fetchIntoRestore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.fetchIntoRestore.UseVisualStyleBackColor = true;
+            this.fetchIntoRestore.Click += new System.EventHandler(this.fetchIntoRestore_Click);
+            // 
+            // fetchIntoDesired
+            // 
+            this.fetchIntoDesired.Location = new System.Drawing.Point(-95, 93);
+            this.fetchIntoDesired.Name = "fetchIntoDesired";
+            this.fetchIntoDesired.Size = new System.Drawing.Size(175, 46);
+            this.fetchIntoDesired.TabIndex = 22;
+            this.fetchIntoDesired.Text = "🖥➡";
+            this.fetchIntoDesired.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.fetchIntoDesired.UseVisualStyleBackColor = true;
+            this.fetchIntoDesired.Click += new System.EventHandler(this.fetchIntoDesired_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(892, 450);
+            this.Controls.Add(this.fetchIntoDesired);
+            this.Controls.Add(this.fetchIntoRestore);
             this.Controls.Add(this.endProgramButton);
             this.Controls.Add(this.dontDoThingsCheckBox);
             this.Controls.Add(this.stateConfigSavedCheckBox);
@@ -374,5 +400,7 @@
         private CheckBox stateConfigSavedCheckBox;
         private CheckBox dontDoThingsCheckBox;
         private Button endProgramButton;
+        private Button fetchIntoRestore;
+        private Button fetchIntoDesired;
     }
 }

@@ -75,8 +75,7 @@ namespace Resolutioner
         {
             if (!dontDoThingsCheckBox.Checked)
             {
-                
-
+                // aaaaaa
             }
         }
 

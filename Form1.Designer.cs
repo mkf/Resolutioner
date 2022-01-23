@@ -208,6 +208,7 @@
             this.swapResolutionsButton.TabIndex = 11;
             this.swapResolutionsButton.Text = "🔁";
             this.swapResolutionsButton.UseVisualStyleBackColor = true;
+            this.swapResolutionsButton.Click += new System.EventHandler(this.swapResolutionsButton_Click);
             // 
             // notifyIcon1
             // 
@@ -224,6 +225,7 @@
             this.nowDesiredButton.TabIndex = 12;
             this.nowDesiredButton.Text = "Now";
             this.nowDesiredButton.UseVisualStyleBackColor = true;
+            this.nowDesiredButton.Click += new System.EventHandler(this.nowDesiredButton_Click);
             // 
             // nowRestoreButton
             // 
@@ -233,6 +235,7 @@
             this.nowRestoreButton.TabIndex = 13;
             this.nowRestoreButton.Text = "Now";
             this.nowRestoreButton.UseVisualStyleBackColor = true;
+            this.nowRestoreButton.Click += new System.EventHandler(this.nowRestoreButton_Click);
             // 
             // loginCheckBox
             // 
@@ -267,12 +270,16 @@
             // shutdownCheckBox
             // 
             this.shutdownCheckBox.AutoSize = true;
+            this.shutdownCheckBox.BackColor = System.Drawing.SystemColors.Control;
+            this.shutdownCheckBox.Enabled = false;
+            this.shutdownCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
             this.shutdownCheckBox.Location = new System.Drawing.Point(298, 355);
             this.shutdownCheckBox.Name = "shutdownCheckBox";
             this.shutdownCheckBox.Size = new System.Drawing.Size(267, 36);
             this.shutdownCheckBox.TabIndex = 17;
             this.shutdownCheckBox.Text = "on system shutdown";
-            this.shutdownCheckBox.UseVisualStyleBackColor = true;
+            this.shutdownCheckBox.UseVisualStyleBackColor = false;
+            this.shutdownCheckBox.Visible = false;
             // 
             // stateConfigSavedCheckBox
             // 
@@ -302,6 +309,7 @@
             this.endProgramButton.TabIndex = 20;
             this.endProgramButton.Text = "End Program";
             this.endProgramButton.UseVisualStyleBackColor = true;
+            this.endProgramButton.Click += new System.EventHandler(this.endProgramButton_Click);
             // 
             // Form1
             // 
@@ -328,6 +336,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.desiredWidthField);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;

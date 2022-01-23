@@ -10,12 +10,24 @@ namespace Resolutioner
         private void Form1_Resize(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized) Hide();
+            else if (WindowState == FormWindowState.Maximized) WindowState = FormWindowState.Normal;
         }
 
         private void notifyIcon1_Click(object sender, EventArgs e)
         {
-            Show();
-            this.WindowState = FormWindowState.Normal;
+            switch (WindowState)
+            {
+                case FormWindowState.Minimized:
+                    Show();
+                    this.WindowState = FormWindowState.Normal;
+                    break;
+                case FormWindowState.Normal:
+                case FormWindowState.Maximized:
+                    Hide();
+                    this.WindowState = FormWindowState.Minimized;
+                    break;
+            }
+            
         }
 
         private static int WM_QUERYENDSESSION = 0x11;

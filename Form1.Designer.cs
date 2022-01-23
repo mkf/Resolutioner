@@ -49,6 +49,8 @@
             this.logoffCheckBox = new System.Windows.Forms.CheckBox();
             this.shutdownCheckBox = new System.Windows.Forms.CheckBox();
             this.stateConfigSavedCheckBox = new System.Windows.Forms.CheckBox();
+            this.dontDoThingsCheckBox = new System.Windows.Forms.CheckBox();
+            this.endProgramButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.desiredWidthField)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.desiredHeightField)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.restoreHeightField)).BeginInit();
@@ -282,11 +284,32 @@
             this.stateConfigSavedCheckBox.Text = "Config Saved";
             this.stateConfigSavedCheckBox.UseVisualStyleBackColor = true;
             // 
+            // dontDoThingsCheckBox
+            // 
+            this.dontDoThingsCheckBox.AutoSize = true;
+            this.dontDoThingsCheckBox.Location = new System.Drawing.Point(591, 283);
+            this.dontDoThingsCheckBox.Name = "dontDoThingsCheckBox";
+            this.dontDoThingsCheckBox.Size = new System.Drawing.Size(213, 36);
+            this.dontDoThingsCheckBox.TabIndex = 19;
+            this.dontDoThingsCheckBox.Text = "Don\'t do things";
+            this.dontDoThingsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // endProgramButton
+            // 
+            this.endProgramButton.Location = new System.Drawing.Point(598, 333);
+            this.endProgramButton.Name = "endProgramButton";
+            this.endProgramButton.Size = new System.Drawing.Size(190, 46);
+            this.endProgramButton.TabIndex = 20;
+            this.endProgramButton.Text = "End Program";
+            this.endProgramButton.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.endProgramButton);
+            this.Controls.Add(this.dontDoThingsCheckBox);
             this.Controls.Add(this.stateConfigSavedCheckBox);
             this.Controls.Add(this.shutdownCheckBox);
             this.Controls.Add(this.logoffCheckBox);
@@ -340,5 +363,7 @@
         private CheckBox logoffCheckBox;
         private CheckBox shutdownCheckBox;
         private CheckBox stateConfigSavedCheckBox;
+        private CheckBox dontDoThingsCheckBox;
+        private Button endProgramButton;
     }
 }

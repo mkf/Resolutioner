@@ -17,7 +17,7 @@ and sessions but is not, and instead aims to work by autostarting.
  - [X] `CORE` actual resolution setting
  - [ ] `FEAT` handling errors of resolution changing instead of ignoring them
  - [ ] `CORE` saving and loading config on start
- - [ ] `CORE` trigger: "Now" button
+ - [X] `CORE` trigger: "Now" button
  - [ ] `CORE` trigger: user login
    - [ ] autostart
    - [ ] trigger: on start

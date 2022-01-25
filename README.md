@@ -14,13 +14,8 @@ It could be written as a Windows Service to be above all users
 and sessions but is not, and instead aims to work by autostarting.
 
 ### To do
- - [ ] `CORE` actual resolution setting
-   - see https://www.codeproject.com/Articles/36664/Changing-Display-Settings-Programmatically#Changing
-     - https://www.codeproject.com/Questions/5261046/How-do-I-change-screen-resolution-C-sharp
-     - http://www.jasinskionline.com/WindowsApi/ref/c/changedisplaysettings.html
-     - https://docs.microsoft.com/pl-pl/windows/win32/api/wingdi/ns-wingdi-devmodea?redirectedfrom=MSDN
-     - https://stackoverflow.com/questions/15897847/how-to-change-screen-resolution-programmatically
-     - aaaaaaaaaa
+ - [X] `CORE` actual resolution setting
+ - [ ] `FEAT` handling errors of resolution changing instead of ignoring them
  - [ ] `CORE` saving and loading config on start
  - [ ] `CORE` trigger: "Now" button
  - [ ] `CORE` trigger: user login

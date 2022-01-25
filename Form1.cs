@@ -75,7 +75,7 @@ namespace Resolutioner
         {
             if (!dontDoThingsCheckBox.Checked)
             {
-                // aaaaaa
+                ActuallyChangingResolution.ChangeDisplaySettings((int) width, (int) height);
             }
         }
 

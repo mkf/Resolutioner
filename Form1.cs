@@ -2,10 +2,12 @@ namespace Resolutioner
 {
     public partial class Form1 : Form
     {
+        private Configuration conf = new Configuration();
         private static Screen srn = Screen.PrimaryScreen;
         public Form1()
         {
             InitializeComponent();
+            loadConfig();
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -138,6 +140,88 @@ namespace Resolutioner
             {
                 swapResolutionsButton.Focus();
             }
+        }
+
+        private void loadConfig()
+        {
+            if(conf.DesiredWidth!=0) desiredWidthField.Value = conf.DesiredWidth;
+            if(conf.DesiredHeight!=0) desiredHeightField.Value = conf.DesiredHeight;
+            if(conf.RestoreWidth!=0) restoreWidthField.Value = conf.RestoreWidth;
+            if(conf.RestoreHeight!=0) restoreHeightField.Value = conf.RestoreHeight;
+            loginCheckBox.Checked = conf.OnLogin;
+            switchCheckBox.Checked = conf.OnSwitch;
+            logoffCheckBox.Checked = conf.OnLogoff;
+            dontDoThingsCheckBox.Checked = conf.DontDoThings;
+        }
+
+        private void saveConfig()
+        {
+            conf.DesiredWidth = desiredWidthField.Value;
+            conf.DesiredHeight = desiredHeightField.Value;
+            conf.RestoreWidth = restoreWidthField.Value;
+            conf.RestoreHeight = restoreHeightField.Value;
+            conf.OnLogin = loginCheckBox.Checked;
+            conf.OnSwitch = switchCheckBox.Checked;
+            conf.OnLogoff = logoffCheckBox.Checked;
+            conf.DontDoThings = dontDoThingsCheckBox.Checked;
+        }
+
+        private bool weChangeChecked = false;
+        private void stateConfigSavedCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!weChangeChecked)
+            {
+                if (stateConfigSavedCheckBox.Checked)
+                {
+                    saveConfig();
+                }
+                else
+                {
+                    loadConfig();
+                }
+            }
+            else weChangeChecked = false;
+        }
+
+        private void onValuesChanged()
+        {
+            weChangeChecked = true;
+            stateConfigSavedCheckBox.Checked = false;
+        }
+
+        private void desiredWidthField_ValueChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
+
+        private void desiredHeightField_ValueChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
+
+        private void restoreWidthField_ValueChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
+
+        private void restoreHeightField_ValueChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
+
+        private void loginCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
+
+        private void switchCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
+
+        private void logoffCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
         }
     }
 }

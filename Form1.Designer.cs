@@ -80,6 +80,7 @@
             0,
             0,
             0});
+            this.desiredWidthField.ValueChanged += new System.EventHandler(this.desiredWidthField_ValueChanged);
             // 
             // label1
             // 
@@ -120,6 +121,7 @@
             0,
             0,
             0});
+            this.desiredHeightField.ValueChanged += new System.EventHandler(this.desiredHeightField_ValueChanged);
             // 
             // label3
             // 
@@ -160,6 +162,7 @@
             0,
             0,
             0});
+            this.restoreHeightField.ValueChanged += new System.EventHandler(this.restoreHeightField_ValueChanged);
             // 
             // label5
             // 
@@ -200,6 +203,7 @@
             0,
             0,
             0});
+            this.restoreWidthField.ValueChanged += new System.EventHandler(this.restoreWidthField_ValueChanged);
             // 
             // swapResolutionsButton
             // 
@@ -248,6 +252,7 @@
             this.loginCheckBox.TabIndex = 14;
             this.loginCheckBox.Text = "on user login";
             this.loginCheckBox.UseVisualStyleBackColor = true;
+            this.loginCheckBox.CheckedChanged += new System.EventHandler(this.loginCheckBox_CheckedChanged);
             // 
             // switchCheckBox
             // 
@@ -258,6 +263,7 @@
             this.switchCheckBox.TabIndex = 15;
             this.switchCheckBox.Text = "on user switch";
             this.switchCheckBox.UseVisualStyleBackColor = true;
+            this.switchCheckBox.CheckedChanged += new System.EventHandler(this.switchCheckBox_CheckedChanged);
             // 
             // logoffCheckBox
             // 
@@ -268,6 +274,7 @@
             this.logoffCheckBox.TabIndex = 16;
             this.logoffCheckBox.Text = "on user logout";
             this.logoffCheckBox.UseVisualStyleBackColor = true;
+            this.logoffCheckBox.CheckedChanged += new System.EventHandler(this.logoffCheckBox_CheckedChanged);
             // 
             // shutdownCheckBox
             // 
@@ -292,6 +299,7 @@
             this.stateConfigSavedCheckBox.TabIndex = 18;
             this.stateConfigSavedCheckBox.Text = "Config Saved";
             this.stateConfigSavedCheckBox.UseVisualStyleBackColor = true;
+            this.stateConfigSavedCheckBox.CheckedChanged += new System.EventHandler(this.stateConfigSavedCheckBox_CheckedChanged);
             // 
             // dontDoThingsCheckBox
             // 

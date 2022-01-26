@@ -16,12 +16,15 @@ and sessions but is not, and instead aims to work by autostarting.
 ### To do
  - [X] `CORE` actual resolution setting
  - [ ] `FEAT` handling errors of resolution changing instead of ignoring them
- - [ ] `CORE` saving and loading config on start
+ - [X] `CORE` saving and loading config on start
+   - does it really work? sometimes it worked sometimes not?
  - [X] `CORE` trigger: "Now" button
  - [ ] `CORE` trigger: user login
    - [ ] autostart
    - [ ] trigger: on start
- - [ ] `CORE` trigger: user switch
+ - [X] `CORE` trigger: user switch
+   - [ ] separate lock/unlock desired/restored
+   - [ ] maybe columns of all SessionSwitchReasons
  - [X] `CORE` trigger: user logout
  - [ ] `FEAT` trigger: distinction between logoff and shutdown
  - [ ] `FEAT` change scaling too, i think it's even in DEVMODE

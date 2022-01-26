@@ -226,5 +226,10 @@ namespace Resolutioner
         {
             onValuesChanged();
         }
+
+        private void dontDoThingsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
     }
 }

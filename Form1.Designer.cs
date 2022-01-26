@@ -310,6 +310,7 @@
             this.dontDoThingsCheckBox.TabIndex = 19;
             this.dontDoThingsCheckBox.Text = "Don\'t do things";
             this.dontDoThingsCheckBox.UseVisualStyleBackColor = true;
+            this.dontDoThingsCheckBox.CheckedChanged += new System.EventHandler(this.dontDoThingsCheckBox_CheckedChanged);
             // 
             // endProgramButton
             // 

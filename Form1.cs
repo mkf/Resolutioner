@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+using Microsoft.Win32;
 using Resolutioner.Properties;
 
 namespace Resolutioner
@@ -11,6 +13,31 @@ namespace Resolutioner
             InitializeComponent();
             loadConfig();
             if(loginCheckBox.Checked) Desire();
+            SystemEvents.SessionSwitch += SystemEventsOnSessionSwitch; 
+        }
+
+        private void SystemEventsOnSessionSwitch(object sender, SessionSwitchEventArgs e)
+        {
+            if (switchCheckBox.Checked)
+            {
+                switch(e.Reason)
+                {
+                    case SessionSwitchReason.ConsoleConnect:
+                    case SessionSwitchReason.RemoteConnect:
+                    case SessionSwitchReason.SessionLogon:
+                    case SessionSwitchReason.SessionUnlock:
+                        Desire();
+                        break;
+                    case SessionSwitchReason.ConsoleDisconnect:
+                    case SessionSwitchReason.RemoteDisconnect:
+                    case SessionSwitchReason.SessionLock:
+                    case SessionSwitchReason.SessionLogoff:
+                        Restore();
+                        break;
+                    case SessionSwitchReason.SessionRemoteControl:
+                        break;
+                }
+            }
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -51,7 +78,11 @@ namespace Resolutioner
         private static bool _reallyClose = false;
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_reallyClose) e.Cancel = false;
+            if (_reallyClose)
+            {
+                SystemEvents.SessionSwitch -= SystemEventsOnSessionSwitch;
+                e.Cancel = false;
+            }
             else if (!_logoffOrShutdown)
             {
                 e.Cancel = true;

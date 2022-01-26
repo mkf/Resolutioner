@@ -1,8 +1,10 @@
+using Resolutioner.Properties;
+
 namespace Resolutioner
 {
     public partial class Form1 : Form
     {
-        private Configuration conf = new Configuration();
+        Settings conf = Properties.Settings.Default;
         private static Screen srn = Screen.PrimaryScreen;
         public Form1()
         {
@@ -164,6 +166,7 @@ namespace Resolutioner
             conf.OnSwitch = switchCheckBox.Checked;
             conf.OnLogoff = logoffCheckBox.Checked;
             conf.DontDoThings = dontDoThingsCheckBox.Checked;
+            conf.Save();
         }
 
         private bool weChangeChecked = false;

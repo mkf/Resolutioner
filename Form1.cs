@@ -10,6 +10,7 @@ namespace Resolutioner
         private static Screen srn = Screen.PrimaryScreen;
         public Form1()
         {
+            Console.WriteLine("Hello");
             InitializeComponent();
             loadConfig();
             if(loginCheckBox.Checked) Desire();
@@ -109,6 +110,7 @@ namespace Resolutioner
 
         private void DoResolution(decimal width, decimal height)
         {
+            Console.WriteLine("Changing resolution to %d %d", (int) width, (int) height);
             if (!dontDoThingsCheckBox.Checked)
             {
                 ActuallyChangingResolution.ChangeDisplaySettings((int) width, (int) height);

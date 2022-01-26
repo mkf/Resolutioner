@@ -10,6 +10,7 @@ namespace Resolutioner
         {
             InitializeComponent();
             loadConfig();
+            if(loginCheckBox.Checked) Desire();
         }
 
         private void Form1_Resize(object sender, EventArgs e)

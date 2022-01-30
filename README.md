@@ -21,8 +21,13 @@ and sessions but is not, and instead aims to work by autostarting.
    - [ ] see about that `Upgrade()` method
  - [X] `CORE` trigger: "Now" button
  - [ ] `CORE` trigger: user login
-   - [ ] autostart
+   - [ ] autostart 
    - [X] trigger: on start
+ - [ ] `IMPR` `Hide()` on start, because it seems
+       it shows up in taskbar as window before re-minimized
+       instead of just in status notification icons area from the start
+ - [ ] `FEAT` detect when not autostart, and configure with another checkbox
+       whether to then not start minimized
  - [X] `CORE` trigger: user switch
    - [X] separate lock/unlock desired/restored
    - [X] maybe columns of all SessionSwitchReasons

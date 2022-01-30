@@ -1,4 +1,7 @@
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using Windows.Win32;
+using Windows.Win32.UI.WindowsAndMessaging;
 using Microsoft.Win32;
 using Resolutioner.Properties;
 
@@ -19,25 +22,50 @@ namespace Resolutioner
 
         private void SystemEventsOnSessionSwitch(object sender, SessionSwitchEventArgs e)
         {
-            if (switchCheckBox.Checked)
+            switch (e.Reason)
             {
-                switch(e.Reason)
-                {
-                    case SessionSwitchReason.ConsoleConnect:
-                    case SessionSwitchReason.RemoteConnect:
-                    case SessionSwitchReason.SessionLogon:
-                    case SessionSwitchReason.SessionUnlock:
-                        Desire();
-                        break;
-                    case SessionSwitchReason.ConsoleDisconnect:
-                    case SessionSwitchReason.RemoteDisconnect:
-                    case SessionSwitchReason.SessionLock:
-                    case SessionSwitchReason.SessionLogoff:
-                        Restore();
-                        break;
-                    case SessionSwitchReason.SessionRemoteControl:
-                        break;
-                }
+                case SessionSwitchReason.ConsoleConnect:
+                    if(onConsoleConnectBox.Checked) Desire();
+                    break;
+                case SessionSwitchReason.RemoteConnect:
+                    if(onRemoteConnectBox.Checked) Desire();
+                    break;
+                case SessionSwitchReason.SessionLogon:
+                    if(onSessionLogonBox.Checked) Desire();
+                    break;
+                case SessionSwitchReason.SessionUnlock:
+                    if(onSessionUnlockBox.Checked) Desire();
+                    break;
+                case SessionSwitchReason.ConsoleDisconnect:
+                    if(onConsoleDisconnectBox.Checked) Restore();
+                    break;
+                case SessionSwitchReason.RemoteDisconnect:
+                    if(onRemoteDisconnectBox.Checked) Restore();
+                    break;
+                case SessionSwitchReason.SessionLock:
+                    if(onSessionLockBox.Checked) Restore();
+                    break;
+                case SessionSwitchReason.SessionLogoff:
+                    if(onSessionLogoffBox.Checked) Restore();
+                    break;
+                case SessionSwitchReason.SessionRemoteControl:
+#pragma warning disable CS0436 // Typ powoduje konflikt z zaimportowanym typem
+                    var gsm = PInvoke.GetSystemMetrics(
+#pragma warning restore CS0436 // Typ powoduje konflikt z zaimportowanym typem
+                        /* Wa¿noœæ	Kod	Opis	Projekt	Plik	Wiersz	Stan pominiêcia
+                           B³¹d	CS1503	Argument „1”: nie mo¿na przekonwertowaæ z „int” na „Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX”	Resolutioner	C:\Users\Mika Feiler\source\repos\Resolutioner\Form1.cs	41	Aktywne
+                            */
+                        (Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX) 0x1000 /* SM_REMOTESESSION */);
+                    switch (gsm)
+                    {
+                        case 0:
+                            if(onRemoteControlOnBox.Checked) Desire();
+                            break;
+                        default:
+                            if(onRemoteControlOffBox.Checked) Restore();
+                            break;
+                    }
+                    break;
             }
         }
 
@@ -185,7 +213,17 @@ namespace Resolutioner
             if(conf.RestoreWidth!=0) restoreWidthField.Value = conf.RestoreWidth;
             if(conf.RestoreHeight!=0) restoreHeightField.Value = conf.RestoreHeight;
             loginCheckBox.Checked = conf.OnLogin;
-            switchCheckBox.Checked = conf.OnSwitch;
+            // switchCheckBox.Checked = conf.OnSwitch;
+            onSessionLockBox.Checked = conf.onSessionLock;
+            onSessionUnlockBox.Checked = conf.onSessionUnlock;
+            onConsoleConnectBox.Checked = conf.onConsoleConnect;
+            onConsoleDisconnectBox.Checked = conf.onConsoleDisconnect;
+            onRemoteConnectBox.Checked = conf.onRemoteConnect;
+            onRemoteDisconnectBox.Checked = conf.onRemoteDisconnect;
+            onRemoteControlOnBox.Checked = conf.onRemoteOn;
+            onRemoteControlOffBox.Checked = conf.onRemoteOff;
+            onSessionLogonBox.Checked = conf.onSessionLogon;
+            onSessionLogoffBox.Checked = conf.onSessionLogoff;
             logoffCheckBox.Checked = conf.OnLogoff;
             dontDoThingsCheckBox.Checked = conf.DontDoThings;
         }
@@ -197,7 +235,17 @@ namespace Resolutioner
             conf.RestoreWidth = restoreWidthField.Value;
             conf.RestoreHeight = restoreHeightField.Value;
             conf.OnLogin = loginCheckBox.Checked;
-            conf.OnSwitch = switchCheckBox.Checked;
+            // conf.OnSwitch = switchCheckBox.Checked;
+            conf.onSessionLock = onSessionLockBox.Checked;
+            conf.onSessionUnlock = onSessionUnlockBox.Checked;
+            conf.onConsoleDisconnect = onConsoleDisconnectBox.Checked;
+            conf.onConsoleConnect = onConsoleConnectBox.Checked;
+            conf.onRemoteConnect = onRemoteConnectBox.Checked;
+            conf.onRemoteDisconnect = onRemoteDisconnectBox.Checked;
+            conf.onRemoteOn = onRemoteControlOnBox.Checked;
+            conf.onRemoteOff = onRemoteControlOffBox.Checked;
+            conf.onSessionLogon = onSessionLogonBox.Checked;
+            conf.onSessionLogoff = onSessionLogoffBox.Checked;
             conf.OnLogoff = logoffCheckBox.Checked;
             conf.DontDoThings = dontDoThingsCheckBox.Checked;
             conf.Save();
@@ -251,17 +299,62 @@ namespace Resolutioner
             onValuesChanged();
         }
 
-        private void switchCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            onValuesChanged();
-        }
-
         private void logoffCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
         private void dontDoThingsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
+
+        private void onSessionUnlockBox_CheckedChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
+
+        private void onSessionLockBox_CheckedChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
+
+        private void onSessionLogon_CheckedChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
+
+        private void onSessionLogoff_CheckedChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
+
+        private void onConsoleConnectBox_CheckedChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
+
+        private void onConsoleDisconnectBox_CheckedChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
+
+        private void onRemoteConnectBox_CheckedChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
+
+        private void onRemoteDisconnectBox_CheckedChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
+
+        private void onRemoteControlOn_CheckedChanged(object sender, EventArgs e)
+        {
+            onValuesChanged();
+        }
+
+        private void onRemoteControlOff_CheckedChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }

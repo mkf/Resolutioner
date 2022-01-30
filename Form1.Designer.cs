@@ -45,7 +45,6 @@
             this.nowDesiredButton = new System.Windows.Forms.Button();
             this.nowRestoreButton = new System.Windows.Forms.Button();
             this.loginCheckBox = new System.Windows.Forms.CheckBox();
-            this.switchCheckBox = new System.Windows.Forms.CheckBox();
             this.logoffCheckBox = new System.Windows.Forms.CheckBox();
             this.shutdownCheckBox = new System.Windows.Forms.CheckBox();
             this.stateConfigSavedCheckBox = new System.Windows.Forms.CheckBox();
@@ -53,10 +52,22 @@
             this.endProgramButton = new System.Windows.Forms.Button();
             this.fetchIntoRestore = new System.Windows.Forms.Button();
             this.fetchIntoDesired = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.onSessionUnlockBox = new System.Windows.Forms.CheckBox();
+            this.onSessionLockBox = new System.Windows.Forms.CheckBox();
+            this.onSessionLogonBox = new System.Windows.Forms.CheckBox();
+            this.onSessionLogoffBox = new System.Windows.Forms.CheckBox();
+            this.onConsoleDisconnectBox = new System.Windows.Forms.CheckBox();
+            this.onConsoleConnectBox = new System.Windows.Forms.CheckBox();
+            this.onRemoteDisconnectBox = new System.Windows.Forms.CheckBox();
+            this.onRemoteConnectBox = new System.Windows.Forms.CheckBox();
+            this.onRemoteControlOffBox = new System.Windows.Forms.CheckBox();
+            this.onRemoteControlOnBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.desiredWidthField)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.desiredHeightField)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.restoreHeightField)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.restoreWidthField)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // desiredWidthField
@@ -246,29 +257,18 @@
             // loginCheckBox
             // 
             this.loginCheckBox.AutoSize = true;
-            this.loginCheckBox.Location = new System.Drawing.Point(106, 273);
+            this.loginCheckBox.Location = new System.Drawing.Point(101, 263);
             this.loginCheckBox.Name = "loginCheckBox";
-            this.loginCheckBox.Size = new System.Drawing.Size(187, 36);
+            this.loginCheckBox.Size = new System.Drawing.Size(289, 36);
             this.loginCheckBox.TabIndex = 14;
-            this.loginCheckBox.Text = "on user login";
+            this.loginCheckBox.Text = "on user login (on start)";
             this.loginCheckBox.UseVisualStyleBackColor = true;
             this.loginCheckBox.CheckedChanged += new System.EventHandler(this.loginCheckBox_CheckedChanged);
-            // 
-            // switchCheckBox
-            // 
-            this.switchCheckBox.AutoSize = true;
-            this.switchCheckBox.Location = new System.Drawing.Point(106, 315);
-            this.switchCheckBox.Name = "switchCheckBox";
-            this.switchCheckBox.Size = new System.Drawing.Size(199, 36);
-            this.switchCheckBox.TabIndex = 15;
-            this.switchCheckBox.Text = "on user switch";
-            this.switchCheckBox.UseVisualStyleBackColor = true;
-            this.switchCheckBox.CheckedChanged += new System.EventHandler(this.switchCheckBox_CheckedChanged);
             // 
             // logoffCheckBox
             // 
             this.logoffCheckBox.AutoSize = true;
-            this.logoffCheckBox.Location = new System.Drawing.Point(106, 357);
+            this.logoffCheckBox.Location = new System.Drawing.Point(487, 263);
             this.logoffCheckBox.Name = "logoffCheckBox";
             this.logoffCheckBox.Size = new System.Drawing.Size(203, 36);
             this.logoffCheckBox.TabIndex = 16;
@@ -282,7 +282,7 @@
             this.shutdownCheckBox.BackColor = System.Drawing.SystemColors.Control;
             this.shutdownCheckBox.Enabled = false;
             this.shutdownCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.shutdownCheckBox.Location = new System.Drawing.Point(357, 357);
+            this.shutdownCheckBox.Location = new System.Drawing.Point(487, 305);
             this.shutdownCheckBox.Name = "shutdownCheckBox";
             this.shutdownCheckBox.Size = new System.Drawing.Size(267, 36);
             this.shutdownCheckBox.TabIndex = 17;
@@ -304,7 +304,7 @@
             // dontDoThingsCheckBox
             // 
             this.dontDoThingsCheckBox.AutoSize = true;
-            this.dontDoThingsCheckBox.Location = new System.Drawing.Point(650, 285);
+            this.dontDoThingsCheckBox.Location = new System.Drawing.Point(337, 585);
             this.dontDoThingsCheckBox.Name = "dontDoThingsCheckBox";
             this.dontDoThingsCheckBox.Size = new System.Drawing.Size(213, 36);
             this.dontDoThingsCheckBox.TabIndex = 19;
@@ -314,7 +314,7 @@
             // 
             // endProgramButton
             // 
-            this.endProgramButton.Location = new System.Drawing.Point(657, 335);
+            this.endProgramButton.Location = new System.Drawing.Point(347, 636);
             this.endProgramButton.Name = "endProgramButton";
             this.endProgramButton.Size = new System.Drawing.Size(190, 46);
             this.endProgramButton.TabIndex = 20;
@@ -344,11 +344,141 @@
             this.fetchIntoDesired.UseVisualStyleBackColor = true;
             this.fetchIntoDesired.Click += new System.EventHandler(this.fetchIntoDesired_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.onRemoteControlOffBox);
+            this.groupBox1.Controls.Add(this.onRemoteControlOnBox);
+            this.groupBox1.Controls.Add(this.onRemoteDisconnectBox);
+            this.groupBox1.Controls.Add(this.onRemoteConnectBox);
+            this.groupBox1.Controls.Add(this.onConsoleDisconnectBox);
+            this.groupBox1.Controls.Add(this.onConsoleConnectBox);
+            this.groupBox1.Controls.Add(this.onSessionLogoffBox);
+            this.groupBox1.Controls.Add(this.onSessionLogonBox);
+            this.groupBox1.Controls.Add(this.onSessionLockBox);
+            this.groupBox1.Controls.Add(this.onSessionUnlockBox);
+            this.groupBox1.Location = new System.Drawing.Point(12, 325);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(868, 254);
+            this.groupBox1.TabIndex = 23;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "on switch only";
+            // 
+            // onSessionUnlockBox
+            // 
+            this.onSessionUnlockBox.AutoSize = true;
+            this.onSessionUnlockBox.Location = new System.Drawing.Point(89, 38);
+            this.onSessionUnlockBox.Name = "onSessionUnlockBox";
+            this.onSessionUnlockBox.Size = new System.Drawing.Size(236, 36);
+            this.onSessionUnlockBox.TabIndex = 0;
+            this.onSessionUnlockBox.Text = "on session unlock";
+            this.onSessionUnlockBox.UseVisualStyleBackColor = true;
+            this.onSessionUnlockBox.CheckedChanged += new System.EventHandler(this.onSessionUnlockBox_CheckedChanged);
+            // 
+            // onSessionLockBox
+            // 
+            this.onSessionLockBox.AutoSize = true;
+            this.onSessionLockBox.Location = new System.Drawing.Point(475, 38);
+            this.onSessionLockBox.Name = "onSessionLockBox";
+            this.onSessionLockBox.Size = new System.Drawing.Size(208, 36);
+            this.onSessionLockBox.TabIndex = 1;
+            this.onSessionLockBox.Text = "on session lock";
+            this.onSessionLockBox.UseVisualStyleBackColor = true;
+            this.onSessionLockBox.CheckedChanged += new System.EventHandler(this.onSessionLockBox_CheckedChanged);
+            // 
+            // onSessionLogonBox
+            // 
+            this.onSessionLogonBox.AutoSize = true;
+            this.onSessionLogonBox.Location = new System.Drawing.Point(89, 80);
+            this.onSessionLogonBox.Name = "onSessionLogonBox";
+            this.onSessionLogonBox.Size = new System.Drawing.Size(245, 36);
+            this.onSessionLogonBox.TabIndex = 2;
+            this.onSessionLogonBox.Text = "on \"session logon\"";
+            this.onSessionLogonBox.UseVisualStyleBackColor = true;
+            this.onSessionLogonBox.CheckedChanged += new System.EventHandler(this.onSessionLogon_CheckedChanged);
+            // 
+            // onSessionLogoffBox
+            // 
+            this.onSessionLogoffBox.AutoSize = true;
+            this.onSessionLogoffBox.Location = new System.Drawing.Point(475, 80);
+            this.onSessionLogoffBox.Name = "onSessionLogoffBox";
+            this.onSessionLogoffBox.Size = new System.Drawing.Size(247, 36);
+            this.onSessionLogoffBox.TabIndex = 3;
+            this.onSessionLogoffBox.Text = "on \"session logoff\"";
+            this.onSessionLogoffBox.UseVisualStyleBackColor = true;
+            this.onSessionLogoffBox.CheckedChanged += new System.EventHandler(this.onSessionLogoff_CheckedChanged);
+            // 
+            // onConsoleDisconnectBox
+            // 
+            this.onConsoleDisconnectBox.AutoSize = true;
+            this.onConsoleDisconnectBox.Location = new System.Drawing.Point(475, 122);
+            this.onConsoleDisconnectBox.Name = "onConsoleDisconnectBox";
+            this.onConsoleDisconnectBox.Size = new System.Drawing.Size(285, 36);
+            this.onConsoleDisconnectBox.TabIndex = 5;
+            this.onConsoleDisconnectBox.Text = "on console disconnect";
+            this.onConsoleDisconnectBox.UseVisualStyleBackColor = true;
+            this.onConsoleDisconnectBox.CheckedChanged += new System.EventHandler(this.onConsoleDisconnectBox_CheckedChanged);
+            // 
+            // onConsoleConnectBox
+            // 
+            this.onConsoleConnectBox.AutoSize = true;
+            this.onConsoleConnectBox.Location = new System.Drawing.Point(89, 122);
+            this.onConsoleConnectBox.Name = "onConsoleConnectBox";
+            this.onConsoleConnectBox.Size = new System.Drawing.Size(255, 36);
+            this.onConsoleConnectBox.TabIndex = 4;
+            this.onConsoleConnectBox.Text = "on console connect";
+            this.onConsoleConnectBox.UseVisualStyleBackColor = true;
+            this.onConsoleConnectBox.CheckedChanged += new System.EventHandler(this.onConsoleConnectBox_CheckedChanged);
+            // 
+            // onRemoteDisconnectBox
+            // 
+            this.onRemoteDisconnectBox.AutoSize = true;
+            this.onRemoteDisconnectBox.Location = new System.Drawing.Point(475, 164);
+            this.onRemoteDisconnectBox.Name = "onRemoteDisconnectBox";
+            this.onRemoteDisconnectBox.Size = new System.Drawing.Size(280, 36);
+            this.onRemoteDisconnectBox.TabIndex = 7;
+            this.onRemoteDisconnectBox.Text = "on remote disconnect";
+            this.onRemoteDisconnectBox.UseVisualStyleBackColor = true;
+            this.onRemoteDisconnectBox.CheckedChanged += new System.EventHandler(this.onRemoteDisconnectBox_CheckedChanged);
+            // 
+            // onRemoteConnectBox
+            // 
+            this.onRemoteConnectBox.AutoSize = true;
+            this.onRemoteConnectBox.Location = new System.Drawing.Point(89, 164);
+            this.onRemoteConnectBox.Name = "onRemoteConnectBox";
+            this.onRemoteConnectBox.Size = new System.Drawing.Size(250, 36);
+            this.onRemoteConnectBox.TabIndex = 6;
+            this.onRemoteConnectBox.Text = "on remote connect";
+            this.onRemoteConnectBox.UseVisualStyleBackColor = true;
+            this.onRemoteConnectBox.CheckedChanged += new System.EventHandler(this.onRemoteConnectBox_CheckedChanged);
+            // 
+            // onRemoteControlOffBox
+            // 
+            this.onRemoteControlOffBox.AutoSize = true;
+            this.onRemoteControlOffBox.Location = new System.Drawing.Point(475, 206);
+            this.onRemoteControlOffBox.Name = "onRemoteControlOffBox";
+            this.onRemoteControlOffBox.Size = new System.Drawing.Size(277, 36);
+            this.onRemoteControlOffBox.TabIndex = 9;
+            this.onRemoteControlOffBox.Text = "on remote control off";
+            this.onRemoteControlOffBox.UseVisualStyleBackColor = true;
+            this.onRemoteControlOffBox.CheckedChanged += new System.EventHandler(this.onRemoteControlOff_CheckedChanged);
+            // 
+            // onRemoteControlOnBox
+            // 
+            this.onRemoteControlOnBox.AutoSize = true;
+            this.onRemoteControlOnBox.Location = new System.Drawing.Point(89, 206);
+            this.onRemoteControlOnBox.Name = "onRemoteControlOnBox";
+            this.onRemoteControlOnBox.Size = new System.Drawing.Size(275, 36);
+            this.onRemoteControlOnBox.TabIndex = 8;
+            this.onRemoteControlOnBox.Text = "on remote control on";
+            this.onRemoteControlOnBox.UseVisualStyleBackColor = true;
+            this.onRemoteControlOnBox.CheckedChanged += new System.EventHandler(this.onRemoteControlOn_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 450);
+            this.ClientSize = new System.Drawing.Size(892, 697);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.fetchIntoDesired);
             this.Controls.Add(this.fetchIntoRestore);
             this.Controls.Add(this.endProgramButton);
@@ -356,7 +486,6 @@
             this.Controls.Add(this.stateConfigSavedCheckBox);
             this.Controls.Add(this.shutdownCheckBox);
             this.Controls.Add(this.logoffCheckBox);
-            this.Controls.Add(this.switchCheckBox);
             this.Controls.Add(this.loginCheckBox);
             this.Controls.Add(this.nowRestoreButton);
             this.Controls.Add(this.nowDesiredButton);
@@ -373,7 +502,9 @@
             this.Controls.Add(this.desiredWidthField);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
+            this.Opacity = 0.8D;
             this.Text = "Resolutioner";
+            this.TopMost = true;
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Resize += new System.EventHandler(this.Form1_Resize);
@@ -381,6 +512,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.desiredHeightField)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.restoreHeightField)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.restoreWidthField)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -403,7 +536,6 @@
         private Button nowDesiredButton;
         private Button nowRestoreButton;
         private CheckBox loginCheckBox;
-        private CheckBox switchCheckBox;
         private CheckBox logoffCheckBox;
         private CheckBox shutdownCheckBox;
         private CheckBox stateConfigSavedCheckBox;
@@ -411,5 +543,16 @@
         private Button endProgramButton;
         private Button fetchIntoRestore;
         private Button fetchIntoDesired;
+        private GroupBox groupBox1;
+        private CheckBox onSessionUnlockBox;
+        private CheckBox onSessionLockBox;
+        private CheckBox onConsoleDisconnectBox;
+        private CheckBox onConsoleConnectBox;
+        private CheckBox onSessionLogoffBox;
+        private CheckBox onSessionLogonBox;
+        private CheckBox onRemoteControlOffBox;
+        private CheckBox onRemoteControlOnBox;
+        private CheckBox onRemoteDisconnectBox;
+        private CheckBox onRemoteConnectBox;
     }
 }

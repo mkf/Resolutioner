@@ -156,7 +156,9 @@ namespace Resolutioner
                 (ushort)Marshal.SizeOf(originalMode);
             // Retrieving current settings
             // to edit them
+#pragma warning disable CS8625 // Nie można przekonwertować literału o wartości null na nienullowalny typ referencyjny.
             EnumDisplaySettings(null,
+#pragma warning restore CS8625 // Nie można przekonwertować literału o wartości null na nienullowalny typ referencyjny.
                 iModeNumEnum.ENUM_CURRENT_SETTINGS,
                 ref originalMode);
 

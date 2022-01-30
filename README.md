@@ -18,16 +18,22 @@ and sessions but is not, and instead aims to work by autostarting.
  - [ ] `FEAT` handling errors of resolution changing instead of ignoring them
  - [X] `CORE` saving and loading config on start
    - does it really work? sometimes it worked sometimes not?
+   - [ ] see about that `Upgrade()` method
  - [X] `CORE` trigger: "Now" button
  - [ ] `CORE` trigger: user login
    - [ ] autostart
-   - [ ] trigger: on start
+   - [X] trigger: on start
  - [X] `CORE` trigger: user switch
-   - [ ] separate lock/unlock desired/restored
-   - [ ] maybe columns of all SessionSwitchReasons
+   - [X] separate lock/unlock desired/restored
+   - [X] maybe columns of all SessionSwitchReasons
  - [X] `CORE` trigger: user logout
  - [ ] `FEAT` trigger: distinction between logoff and shutdown
  - [ ] `FEAT` change scaling too, i think it's even in DEVMODE
+ - [ ] `FEAT` introduce three-state checkboxes/dropdowns to pick the other side
+       for a trigger, or something
+ - [ ] `IMPR` don't depend on RawInputLight nuget just for
+       `Windows.Win32.UI.WindowsAndMessaging.SYSTEM_METRICS_INDEX`,
+       get that with CsWin32 instead by NativeMethods.txt or somehow
 
 ### Usage
 

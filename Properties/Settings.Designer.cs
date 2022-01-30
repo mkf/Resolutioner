@@ -86,18 +86,6 @@ namespace Resolutioner.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool OnSwitch {
-            get {
-                return ((bool)(this["OnSwitch"]));
-            }
-            set {
-                this["OnSwitch"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool OnLogoff {
             get {
                 return ((bool)(this["OnLogoff"]));
@@ -116,6 +104,126 @@ namespace Resolutioner.Properties {
             }
             set {
                 this["DontDoThings"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool onSessionUnlock {
+            get {
+                return ((bool)(this["onSessionUnlock"]));
+            }
+            set {
+                this["onSessionUnlock"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool onSessionLock {
+            get {
+                return ((bool)(this["onSessionLock"]));
+            }
+            set {
+                this["onSessionLock"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool onSessionLogon {
+            get {
+                return ((bool)(this["onSessionLogon"]));
+            }
+            set {
+                this["onSessionLogon"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool onSessionLogoff {
+            get {
+                return ((bool)(this["onSessionLogoff"]));
+            }
+            set {
+                this["onSessionLogoff"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool onConsoleConnect {
+            get {
+                return ((bool)(this["onConsoleConnect"]));
+            }
+            set {
+                this["onConsoleConnect"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool onConsoleDisconnect {
+            get {
+                return ((bool)(this["onConsoleDisconnect"]));
+            }
+            set {
+                this["onConsoleDisconnect"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool onRemoteConnect {
+            get {
+                return ((bool)(this["onRemoteConnect"]));
+            }
+            set {
+                this["onRemoteConnect"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool onRemoteDisconnect {
+            get {
+                return ((bool)(this["onRemoteDisconnect"]));
+            }
+            set {
+                this["onRemoteDisconnect"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool onRemoteOn {
+            get {
+                return ((bool)(this["onRemoteOn"]));
+            }
+            set {
+                this["onRemoteOn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool onRemoteOff {
+            get {
+                return ((bool)(this["onRemoteOff"]));
+            }
+            set {
+                this["onRemoteOff"] = value;
             }
         }
     }

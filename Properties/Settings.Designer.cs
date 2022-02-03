@@ -226,5 +226,17 @@ namespace Resolutioner.Properties {
                 this["onRemoteOff"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int confMigration {
+            get {
+                return ((int)(this["confMigration"]));
+            }
+            set {
+                this["confMigration"] = value;
+            }
+        }
     }
 }

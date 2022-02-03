@@ -208,34 +208,64 @@ namespace Resolutioner
 
         private void loadConfig()
         {
+            conf.Upgrade();
             if(conf.DesiredWidth!=0) desiredWidthField.Value = conf.DesiredWidth;
             if(conf.DesiredHeight!=0) desiredHeightField.Value = conf.DesiredHeight;
             if(conf.RestoreWidth!=0) restoreWidthField.Value = conf.RestoreWidth;
             if(conf.RestoreHeight!=0) restoreHeightField.Value = conf.RestoreHeight;
             loginCheckBox.Checked = conf.OnLogin;
             // switchCheckBox.Checked = conf.OnSwitch;
-            onSessionLockBox.Checked = conf.onSessionLock;
-            onSessionUnlockBox.Checked = conf.onSessionUnlock;
-            onConsoleConnectBox.Checked = conf.onConsoleConnect;
-            onConsoleDisconnectBox.Checked = conf.onConsoleDisconnect;
-            onRemoteConnectBox.Checked = conf.onRemoteConnect;
-            onRemoteDisconnectBox.Checked = conf.onRemoteDisconnect;
-            onRemoteControlOnBox.Checked = conf.onRemoteOn;
-            onRemoteControlOffBox.Checked = conf.onRemoteOff;
-            onSessionLogonBox.Checked = conf.onSessionLogon;
-            onSessionLogoffBox.Checked = conf.onSessionLogoff;
+            bool yeah = true;
+            try
+            {
+                if (conf.confMigration == 0 && (conf["OnSwitch"] as bool? ?? false))
+                {
+                    onSessionLockBox.Checked = true;
+                    onSessionUnlockBox.Checked = true;
+                    onConsoleConnectBox.Checked = true;
+                    onConsoleDisconnectBox.Checked = true;
+                    onRemoteConnectBox.Checked = true;
+                    onRemoteDisconnectBox.Checked = true;
+                    onRemoteControlOnBox.Checked = true;
+                    onRemoteControlOffBox.Checked = true;
+                    onSessionLogonBox.Checked = true;
+                    onSessionLogoffBox.Checked = true;
+                    yeah = false;
+                }
+            } catch (System.Configuration.SettingsPropertyNotFoundException) {}
+            if(yeah)
+            {
+                onSessionLockBox.Checked = conf.onSessionLock;
+                onSessionUnlockBox.Checked = conf.onSessionUnlock;
+                onConsoleConnectBox.Checked = conf.onConsoleConnect;
+                onConsoleDisconnectBox.Checked = conf.onConsoleDisconnect;
+                onRemoteConnectBox.Checked = conf.onRemoteConnect;
+                onRemoteDisconnectBox.Checked = conf.onRemoteDisconnect;
+                onRemoteControlOnBox.Checked = conf.onRemoteOn;
+                onRemoteControlOffBox.Checked = conf.onRemoteOff;
+                onSessionLogonBox.Checked = conf.onSessionLogon;
+                onSessionLogoffBox.Checked = conf.onSessionLogoff;
+            }
             logoffCheckBox.Checked = conf.OnLogoff;
             dontDoThingsCheckBox.Checked = conf.DontDoThings;
+            weChangeChecked = true;
+            stateConfigSavedCheckBox.Checked = true;
         }
 
         private void saveConfig()
         {
+            conf.confMigration = 1;
             conf.DesiredWidth = desiredWidthField.Value;
             conf.DesiredHeight = desiredHeightField.Value;
             conf.RestoreWidth = restoreWidthField.Value;
             conf.RestoreHeight = restoreHeightField.Value;
             conf.OnLogin = loginCheckBox.Checked;
             // conf.OnSwitch = switchCheckBox.Checked;
+            try
+            {
+                if (conf["OnSwitch"] as bool? ?? false)
+                    conf["OnSwitch"] = false;
+            } catch (System.Configuration.SettingsPropertyNotFoundException) {}
             conf.onSessionLock = onSessionLockBox.Checked;
             conf.onSessionUnlock = onSessionUnlockBox.Checked;
             conf.onConsoleDisconnect = onConsoleDisconnectBox.Checked;

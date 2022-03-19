@@ -147,7 +147,14 @@ public class MyIniFile
 
     public MyIniFile()
     {
-        FileStream = File.Open(Filepath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+        try
+        {
+            FileStream = File.Open(Filepath, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+        }
+        catch (FileNotFoundException)
+        {
+            FileStream = File.Open(Filepath, FileMode.CreateNew, FileAccess.Write, FileShare.None);
+        }
         try
         {
             Read();
@@ -170,95 +177,109 @@ public class MyIniFile
     {
         if (FileStream.Length != 0)
         {
-            var streamReader = new StreamReader(FileStream);
-            var line = streamReader.ReadLine();
-            var confMigration = Int32.Parse(line ?? throw new InvalidOperationException());
-            if (confMigration == 2)
+            try
             {
-                var builder = new Config(confMigration, false);
-                do
+                var streamReader = new StreamReader(FileStream);
+                var line = streamReader.ReadLine();
+                var confMigration = Int32.Parse(line ?? throw new InvalidOperationException());
+                if (confMigration == 2)
                 {
-                    line = streamReader.ReadLine() ?? throw new Exception("ugh no");
-                    var strings = line.Split("/");
-                    switch (strings[0])
+                    var builder = new Config(confMigration, false);
+                    do
                     {
-                        case "Resolutions":
-                            for (int i = 1; i <= 4; i++)
-                            {
-                                var x = Int32.Parse(strings[i]);
-                                switch (i)
+                        line = streamReader.ReadLine() ?? throw new Exception("ugh no");
+                        var strings = line.Split("/");
+                        switch (strings[0])
+                        {
+                            case "Resolutions":
+                                for (int i = 1; i <= 4; i++)
                                 {
-                                    case 1:
-                                        builder.DesiredWidth = x;
-                                        break;
-                                    case 2:
-                                        builder.DesiredHeight = x;
-                                        break;
-                                    case 3:
-                                        builder.RestoreWidth = x;
-                                        break;
-                                    case 4:
-                                        builder.RestoreHeight = x;
-                                        break;
+                                    var x = Int32.Parse(strings[i]);
+                                    switch (i)
+                                    {
+                                        case 1:
+                                            builder.DesiredWidth = x;
+                                            break;
+                                        case 2:
+                                            builder.DesiredHeight = x;
+                                            break;
+                                        case 3:
+                                            builder.RestoreWidth = x;
+                                            break;
+                                        case 4:
+                                            builder.RestoreHeight = x;
+                                            break;
+                                    }
                                 }
-                            }
 
-                            break;
-                        case Config.Fields.OnLogin:
-                            builder.OnLogin = true;
-                            break;
-                        case Config.Fields.OnLogoff:
-                            builder.OnLogoff = true;
-                            break;
-                        case Config.Fields.DontDoThings:
-                            builder.DontDoThings = true;
-                            break;
-                        case Config.Fields.OnSessionUnlock:
-                            builder.OnSessionUnlock = true;
-                            break;
-                        case Config.Fields.OnSessionLock:
-                            builder.OnSessionLock = true;
-                            break;
-                        case Config.Fields.OnSessionLogon:
-                            builder.OnSessionLogon = true;
-                            break;
-                        case Config.Fields.OnSessionLogoff:
-                            builder.OnSessionLogoff = true;
-                            break;
-                        case Config.Fields.OnConsoleConnect:
-                            builder.OnConsoleConnect = true;
-                            break;
-                        case Config.Fields.OnConsoleDisconnect:
-                            builder.OnConsoleDisconnect = true;
-                            break;
-                        case Config.Fields.OnRemoteConnect:
-                            builder.OnRemoteConnect = true;
-                            break;
-                        case Config.Fields.OnRemoteDisconnect:
-                            builder.OnRemoteDisconnect = true;
-                            break;
-                        case Config.Fields.OnRemoteOn:
-                            builder.OnRemoteOn = true;
-                            break;
-                        case Config.Fields.OnRemoteOff:
-                            builder.OnRemoteOff = true;
-                            break;
-                        case "":
-                            break;
-                        default:
-                            throw new ArgumentException(strings.ToString());
-                    }
-                } while (streamReader.Peek() >= 0);
+                                break;
+                            case Config.Fields.OnLogin:
+                                builder.OnLogin = true;
+                                break;
+                            case Config.Fields.OnLogoff:
+                                builder.OnLogoff = true;
+                                break;
+                            case Config.Fields.DontDoThings:
+                                builder.DontDoThings = true;
+                                break;
+                            case Config.Fields.OnSessionUnlock:
+                                builder.OnSessionUnlock = true;
+                                break;
+                            case Config.Fields.OnSessionLock:
+                                builder.OnSessionLock = true;
+                                break;
+                            case Config.Fields.OnSessionLogon:
+                                builder.OnSessionLogon = true;
+                                break;
+                            case Config.Fields.OnSessionLogoff:
+                                builder.OnSessionLogoff = true;
+                                break;
+                            case Config.Fields.OnConsoleConnect:
+                                builder.OnConsoleConnect = true;
+                                break;
+                            case Config.Fields.OnConsoleDisconnect:
+                                builder.OnConsoleDisconnect = true;
+                                break;
+                            case Config.Fields.OnRemoteConnect:
+                                builder.OnRemoteConnect = true;
+                                break;
+                            case Config.Fields.OnRemoteDisconnect:
+                                builder.OnRemoteDisconnect = true;
+                                break;
+                            case Config.Fields.OnRemoteOn:
+                                builder.OnRemoteOn = true;
+                                break;
+                            case Config.Fields.OnRemoteOff:
+                                builder.OnRemoteOff = true;
+                                break;
+                            case "":
+                                break;
+                            default:
+                                StringBuilder builder_here = new StringBuilder();
+                                foreach (var s in strings)
+                                    builder_here.Append(s);
+                                throw new ArgumentException(builder_here.ToString());
+                        }
+                    } while (streamReader.Peek() >= 0);
 
-                streamReader.Dispose();
-                FileStream.Seek(0, SeekOrigin.Begin);
-                Conf = builder;
+                    streamReader.Dispose();
+                    // FileStream.Seek(0, SeekOrigin.Begin);
+                    Conf = builder;
+                }
+                else
+                {
+                    streamReader.Dispose();
+                    // FileStream.Seek(0, SeekOrigin.Begin);
+                    throw new ArgumentException();
+                }
             }
-            else
+            catch (UnauthorizedAccessException)
             {
-                streamReader.Dispose();
-                FileStream.Seek(0, SeekOrigin.Begin);
                 throw new ArgumentException();
+            }
+            finally
+            {
+                FileStream = File.Open(Filepath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
             }
         }
         else
@@ -270,6 +291,8 @@ public class MyIniFile
 
     public void Write()
     {
+        FileStream.Close();
+        FileStream = File.Open(Filepath, FileMode.Truncate, FileAccess.Write, FileShare.None);
         StreamWriter streamWriter = new(FileStream);
         streamWriter.WriteLine(Conf.ConfMigration);
         streamWriter.WriteLine("Resolutions/{0}/{1}/{2}/{3}",
@@ -277,7 +300,8 @@ public class MyIniFile
         streamWriter.Write(Conf.BoolsToString());
         streamWriter.Flush();
         streamWriter.Dispose();
-        FileStream.Seek(0, SeekOrigin.Begin);
+        // FileStream.Seek(0, SeekOrigin.Begin);
+        FileStream = File.Open(Filepath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
     }
 
     public void Write(Config what)

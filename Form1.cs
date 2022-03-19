@@ -5,14 +5,25 @@ using Windows.Win32.UI.WindowsAndMessaging;
 using Microsoft.Win32;
 using Resolutioner.Properties;
 
+//#define DOTNETCONF //instead of the new ini files thing
+
 namespace Resolutioner
 {
     public partial class Form1 : Form
     {
+#if DOTNETCONF
         Settings conf = Properties.Settings.Default;
+#else
+        private MyIniFile myIni = new();
+        private MyIniFile.Config conf;
+#endif
         private static Screen srn = Screen.PrimaryScreen;
         public Form1()
         {
+#if DOTNETCONF
+#else
+            conf = myIni.Conf; // let it have it
+#endif
             Console.WriteLine("Hello");
             InitializeComponent();
             loadConfig();
@@ -208,7 +219,11 @@ namespace Resolutioner
 
         private void loadConfig()
         {
+#if DOTNETCONF
             conf.Upgrade();
+#else
+            conf = myIni.Conf; //just in case
+#endif
             if(conf.DesiredWidth!=0) desiredWidthField.Value = conf.DesiredWidth;
             if(conf.DesiredHeight!=0) desiredHeightField.Value = conf.DesiredHeight;
             if(conf.RestoreWidth!=0) restoreWidthField.Value = conf.RestoreWidth;
@@ -216,6 +231,7 @@ namespace Resolutioner
             loginCheckBox.Checked = conf.OnLogin;
             // switchCheckBox.Checked = conf.OnSwitch;
             bool yeah = true;
+#if DOTNETCONF
             try
             {
                 if (conf.confMigration == 0 && (conf["OnSwitch"] as bool? ?? false))
@@ -233,8 +249,10 @@ namespace Resolutioner
                     yeah = false;
                 }
             } catch (System.Configuration.SettingsPropertyNotFoundException) {}
+#endif
             if(yeah)
             {
+#if DOTNETCONF
                 onSessionLockBox.Checked = conf.onSessionLock;
                 onSessionUnlockBox.Checked = conf.onSessionUnlock;
                 onConsoleConnectBox.Checked = conf.onConsoleConnect;
@@ -245,6 +263,18 @@ namespace Resolutioner
                 onRemoteControlOffBox.Checked = conf.onRemoteOff;
                 onSessionLogonBox.Checked = conf.onSessionLogon;
                 onSessionLogoffBox.Checked = conf.onSessionLogoff;
+#else
+                onSessionLockBox.Checked = conf.OnSessionLock;
+                onSessionUnlockBox.Checked = conf.OnSessionUnlock;
+                onConsoleConnectBox.Checked = conf.OnConsoleConnect;
+                onConsoleDisconnectBox.Checked = conf.OnConsoleDisconnect;
+                onRemoteConnectBox.Checked = conf.OnRemoteConnect;
+                onRemoteDisconnectBox.Checked = conf.OnRemoteDisconnect;
+                onRemoteControlOnBox.Checked = conf.OnRemoteOn;
+                onRemoteControlOffBox.Checked = conf.OnRemoteOff;
+                onSessionLogonBox.Checked = conf.OnSessionLogon;
+                onSessionLogoffBox.Checked = conf.OnSessionLogoff;
+#endif
             }
             logoffCheckBox.Checked = conf.OnLogoff;
             dontDoThingsCheckBox.Checked = conf.DontDoThings;
@@ -252,20 +282,25 @@ namespace Resolutioner
             stateConfigSavedCheckBox.Checked = true;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void saveConfig()
         {
+#if DOTNETCONF
             conf.confMigration = 1;
+#endif
             conf.DesiredWidth = desiredWidthField.Value;
             conf.DesiredHeight = desiredHeightField.Value;
             conf.RestoreWidth = restoreWidthField.Value;
             conf.RestoreHeight = restoreHeightField.Value;
             conf.OnLogin = loginCheckBox.Checked;
+#if DOTNETCONF
             // conf.OnSwitch = switchCheckBox.Checked;
             try
             {
                 if (conf["OnSwitch"] as bool? ?? false)
                     conf["OnSwitch"] = false;
             } catch (System.Configuration.SettingsPropertyNotFoundException) {}
+
             conf.onSessionLock = onSessionLockBox.Checked;
             conf.onSessionUnlock = onSessionUnlockBox.Checked;
             conf.onConsoleDisconnect = onConsoleDisconnectBox.Checked;
@@ -276,12 +311,30 @@ namespace Resolutioner
             conf.onRemoteOff = onRemoteControlOffBox.Checked;
             conf.onSessionLogon = onSessionLogonBox.Checked;
             conf.onSessionLogoff = onSessionLogoffBox.Checked;
+#else
+            conf.OnSessionLock = onSessionLockBox.Checked;
+            conf.OnSessionUnlock = onSessionUnlockBox.Checked;
+            conf.OnConsoleDisconnect = onConsoleDisconnectBox.Checked;
+            conf.OnConsoleConnect = onConsoleConnectBox.Checked;
+            conf.OnRemoteConnect = onRemoteConnectBox.Checked;
+            conf.OnRemoteDisconnect = onRemoteDisconnectBox.Checked;
+            conf.OnRemoteOn = onRemoteControlOnBox.Checked;
+            conf.OnRemoteOff = onRemoteControlOffBox.Checked;
+            conf.OnSessionLogon = onSessionLogonBox.Checked;
+            conf.OnSessionLogoff = onSessionLogoffBox.Checked;
+#endif
             conf.OnLogoff = logoffCheckBox.Checked;
             conf.DontDoThings = dontDoThingsCheckBox.Checked;
+#if DOTNETCONF
             conf.Save();
+#else
+            myIni.Write(conf);
+#endif
         }
 
         private bool weChangeChecked = false;
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void stateConfigSavedCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (!weChangeChecked)
@@ -292,98 +345,121 @@ namespace Resolutioner
                 }
                 else
                 {
+#if DOTNETCONF
+#else
+                    myIni.Read();
+#endif
                     loadConfig();
                 }
             }
             else weChangeChecked = false;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa",
+            Justification = "It's in the designer as handler, like the belows, and refactoring may fail")]
         private void onValuesChanged()
         {
             weChangeChecked = true;
             stateConfigSavedCheckBox.Checked = false;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void desiredWidthField_ValueChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void desiredHeightField_ValueChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void restoreWidthField_ValueChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void restoreHeightField_ValueChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void loginCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void logoffCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void dontDoThingsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void onSessionUnlockBox_CheckedChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void onSessionLockBox_CheckedChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void onSessionLogon_CheckedChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void onSessionLogoff_CheckedChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void onConsoleConnectBox_CheckedChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void onConsoleDisconnectBox_CheckedChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void onRemoteConnectBox_CheckedChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void onRemoteDisconnectBox_CheckedChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void onRemoteControlOn_CheckedChanged(object sender, EventArgs e)
         {
             onValuesChanged();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
         private void onRemoteControlOff_CheckedChanged(object sender, EventArgs e)
         {
             onValuesChanged();

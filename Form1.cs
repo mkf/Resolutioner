@@ -18,8 +18,12 @@ namespace Resolutioner
         private MyIniFile.Config conf;
 #endif
         private static Screen srn = Screen.PrimaryScreen;
+
+        private System.EventHandler stateConfigSavedCheckbox_EventHandler;
         public Form1()
         {
+
+            stateConfigSavedCheckbox_EventHandler = stateConfigSavedCheckBox_CheckedChanged;
 #if DOTNETCONF
 #else
             conf = myIni.Conf; // let it have it
@@ -224,6 +228,7 @@ namespace Resolutioner
 #else
             conf = myIni.Conf; //just in case
 #endif
+            inhibitChangeChecked = true;
             if(conf.DesiredWidth!=0) desiredWidthField.Value = conf.DesiredWidth;
             if(conf.DesiredHeight!=0) desiredHeightField.Value = conf.DesiredHeight;
             if(conf.RestoreWidth!=0) restoreWidthField.Value = conf.RestoreWidth;
@@ -278,8 +283,9 @@ namespace Resolutioner
             }
             logoffCheckBox.Checked = conf.OnLogoff;
             dontDoThingsCheckBox.Checked = conf.DontDoThings;
-            weChangeChecked = true;
+            //weChangeChecked = true;
             stateConfigSavedCheckBox.Checked = true;
+            inhibitChangeChecked = false;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
@@ -332,35 +338,49 @@ namespace Resolutioner
 #endif
         }
 
-        private bool weChangeChecked = false;
+        //private bool weChangeChecked = true; // because apparently CheckedChanged happens at startup
+        private bool inhibitChangeChecked = false;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
-        private void stateConfigSavedCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void stateConfigSavedCheckBox_CheckedChanged(object? sender, EventArgs e)
         {
-            if (!weChangeChecked)
+            if (inhibitChangeChecked) return;
+            //if (!weChangeChecked)
+            //{
+            if (stateConfigSavedCheckBox.Checked)
             {
-                if (stateConfigSavedCheckBox.Checked)
-                {
-                    saveConfig();
-                }
-                else
-                {
+                saveConfig();
+            }
+            else
+            {
 #if DOTNETCONF
 #else
-                    myIni.Read();
+                myIni.Read();
 #endif
-                    loadConfig();
-                }
+                loadConfig();
             }
-            else weChangeChecked = false;
+            //}
+            //else weChangeChecked = false;
         }
+        /*
+        private void InhibitCheckedChanged()
+        {
+            stateConfigSavedCheckBox.CheckedChanged -= stateConfigSavedCheckBox_CheckedChanged;
+        }
+
+        private void UnInhibitCheckedChanged()
+        {
+            stateConfigSavedCheckBox.CheckedChanged += stateConfigSavedCheckBox_CheckedChanged;
+        }
+        */
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa",
             Justification = "It's in the designer as handler, like the belows, and refactoring may fail")]
         private void onValuesChanged()
         {
-            weChangeChecked = true;
+            inhibitChangeChecked = true;
             stateConfigSavedCheckBox.Checked = false;
+            inhibitChangeChecked = false;
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Style nazewnictwa", Justification = "<Oczekuj¹ce>")]
